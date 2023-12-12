@@ -1,9 +1,16 @@
-import { Controller } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Body, Controller, HttpCode, Inject, Post, Query } from '@nestjs/common';
+import { ClientProxy, RmqRecordBuilder } from '@nestjs/microservices';
 
-@Controller()
+
+@Controller('api')
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(@Inject('MATH_SERVICE') private client: ClientProxy) {}
 
   
+
+  @Post('/call')
+  @HttpCode(200)
+  call(@Query('command') cmd: string, @Body() data: number|string) {
+    return this.client.send<number>({ cmd }, data);
+  }
 }
