@@ -5,12 +5,15 @@ import { MyLoggerService } from './logger/my-logger.service';
 
 @Controller()
 export class AppController {
-  private logger = new MyLoggerService('logs','AppController')
+  private logger = new MyLoggerService('logs', 'AppController');
   constructor(private readonly appService: AppService) {}
 
   @MessagePattern('x2')
   async mmultiplyNumberX2(@Payload() data: { num: number }) {
-    this.logger.log('the mmultiplyNumberX2 method worked, data received:', data);
+    this.logger.log(
+      'the mmultiplyNumberX2 method worked, data received:',
+      data,
+    );
     return await this.appService.multiplicationNumber(data);
   }
 

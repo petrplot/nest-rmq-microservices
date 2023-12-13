@@ -9,7 +9,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         name: 'MATH_SERVICE',
         transport: Transport.RMQ,
         options: {
-          //этот url для демонстрации, для работы сервиса добавьте свой url 
+          //этот url для демонстрации, для работы сервиса добавьте свой url
           urls: ['amqp://admin:1234@localhost:5672'],
           queue: 'cats_queue',
           queueOptions: {

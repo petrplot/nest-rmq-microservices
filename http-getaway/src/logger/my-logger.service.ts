@@ -10,13 +10,16 @@ export class MyLoggerService implements LoggerService {
   regexp: RegExp;
   context: string;
 
-  constructor(logPath:string, context:string) {
+  constructor(logPath: string, context: string) {
+    fs.mkdir('logs', { recursive: true }, (err) => {
+      if (err) throw err;
+    });
     this.path = logPath;
     const date = new Date().toISOString().substring(0, 10);
     const filePath = path.join(logPath, `${date}.log`);
     this.stream = fs.createWriteStream(filePath, { flags: 'a' });
     this.regexp = new RegExp(path.dirname(this.path), 'g');
-    this.context = context
+    this.context = context;
   }
   private COLORS = {
     info: '\x1b[1;36;46m',
@@ -24,7 +27,7 @@ export class MyLoggerService implements LoggerService {
     error: '\x1b[1;31;41m',
     system: '\x1b[1;34m',
     access: '\x1b[1;32;42m',
-    warn: '\x1b[1;33;43m'
+    warn: '\x1b[1;33;43m',
   };
   private DATETIME_LENGTH = 19;
 
@@ -36,7 +39,7 @@ export class MyLoggerService implements LoggerService {
     const now = new Date().toISOString();
     const date = now.substring(0, this.DATETIME_LENGTH);
     const color = this.COLORS[type];
-    const line =`[${this.context}]`+'\t'+ date + '\t' + s;
+    const line = `[${this.context}]` + '\t' + date + '\t' + s;
     console.log(color + line + '\x1b[0m');
     const out = line.replace(/[\n\r]\s*/g, '; ') + '\n';
     this.stream.write(out);
@@ -58,7 +61,7 @@ export class MyLoggerService implements LoggerService {
   }
 
   error(...args) {
-    const msg = util.format(...args)
+    const msg = util.format(...args);
     this.write('error', msg);
   }
 
