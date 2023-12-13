@@ -1,17 +1,17 @@
-### nest-rmq-microservices
+# nest-rmq-microservices
 solving a test task on the topic of creating a microservice on rmq
 for the application to work correctly, you need to install the RabbitMQ message broker on your computer
 
 ## Installation
 
-# for http-getaway
+### for http-getaway
 ```
 $ cd http-getaway
 ```
 ```
 $ npm install
 ```
-# for rmq-service
+### for rmq-service
 ```
 $ cd rmq-service
 ```
@@ -21,24 +21,24 @@ $ npm install
 ## Running the app
 
 
-# for http-getaway
+### for http-getaway
 ```
 $ cd http-getaway
 ```
 
-# for rmq-service
+### for rmq-service
 ```
 $ cd rmq-service
 ```
-# development
+### development
 ```
 $ npm run start
 ```
-# watch mode
+### watch mode
 ```
 $ npm run start:dev
 ```
-# production mode
+### production mode
 ```
 $ npm run start:prod
 
