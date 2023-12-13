@@ -1,6 +1,10 @@
 ### nest-rmq-microservices
 solving a test task on the topic of creating a microservice on rmq
 
+```
+for the application to work correctly, you need to install the RabbitMQ message broker on your computer
+```
+
 ## Installation
 
 ```bash
