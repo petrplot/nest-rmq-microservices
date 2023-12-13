@@ -3,21 +3,29 @@ import {
   Controller,
   HttpCode,
   Inject,
+  Logger,
   Post,
   Query,
+  Res,
 } from '@nestjs/common';
 import { ClientProxy, RmqRecordBuilder } from '@nestjs/microservices';
+import { MyLoggerService } from './logger/my-logger.service';
 
 @Controller('api')
 export class AppController {
+  private logger = new MyLoggerService('logs','AppController');
   constructor(@Inject('MATH_SERVICE') private client: ClientProxy) {}
 
   @Post('/call')
   @HttpCode(200)
-  call(@Query('command') cmd: string, @Body() data: number | string) {
-    console.log('data:', data);
-    console.log('cmd:', cmd);
+  call(
+    @Query('command') cmd: string,
+    @Body() data: { num: number } | { name: string },
+  ) {
+    this.logger.log(`data:${JSON.stringify(data)}`);
+    this.logger.log(`cmd:, ${cmd}`);
     const record = new RmqRecordBuilder(data).build();
-    return this.client.send<number | string>(cmd, record);
+    const res = this.client.send<number | string>(cmd, record);
+    return res
   }
 }

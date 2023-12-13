@@ -1,8 +1,10 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { MyLoggerService } from './logger/my-logger.service';
 
 async function bootstrap() {
+  const logger = new MyLoggerService('logs', 'bootstrap')
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     AppModule,
     {
@@ -17,5 +19,6 @@ async function bootstrap() {
     },
   );
   await app.listen();
+  logger.log('server is working now')
 }
 bootstrap();
