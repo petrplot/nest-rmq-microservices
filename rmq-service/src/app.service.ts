@@ -1,6 +1,4 @@
-import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
-import { ExceptionsHandler } from '@nestjs/core/exceptions/exceptions-handler';
-import { error } from 'console';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { MyLoggerService } from './logger/my-logger.service';
 
 @Injectable()
