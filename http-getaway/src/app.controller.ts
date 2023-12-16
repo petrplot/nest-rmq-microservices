@@ -7,7 +7,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { ClientProxy, RmqRecordBuilder } from '@nestjs/microservices';
-import { MyLoggerService } from './logger/my-logger.service';
+import { MyLoggerService } from './logger';
 import { DataDTO } from './types';
 
 @Controller('api')
@@ -30,7 +30,8 @@ export class AppController {
       if (cmd === 'hi') {
         const record = new RmqRecordBuilder(data.name).build();
         return this.client.send<DataDTO>(cmd, record);
-      } else if (cmd === 'x2') {
+      }
+      if (cmd === 'x2') {
         const record = new RmqRecordBuilder(data.num).build();
         return this.client.send<DataDTO>(cmd, record);
       } else {

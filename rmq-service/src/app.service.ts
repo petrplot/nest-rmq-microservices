@@ -4,11 +4,11 @@ import { MyLoggerService } from './logger/my-logger.service';
 @Injectable()
 export class AppService {
   private logger = new MyLoggerService('logs', 'AppService');
-  async multiplicationNumber(data: { num: number }): Promise<number> {
+
+  async multiplicationNumber(num: number): Promise<number> {
     try {
       return new Promise((resolve) => {
         setTimeout(() => {
-          const { num } = data;
           if (!num) {
             this.logger.error(`num is: ${num}`);
             throw new InternalServerErrorException('num error');
@@ -23,9 +23,8 @@ export class AppService {
     }
   }
 
-  async sayHallo(data: { name: string }) {
+  async sayHallo(name:string) {
     try {
-      const { name } = data;
       if (!name) {
         this.logger.error(`num is: ${name}`);
         throw new Error('name error');

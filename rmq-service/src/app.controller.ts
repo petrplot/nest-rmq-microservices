@@ -9,7 +9,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @MessagePattern('x2')
-  async mmultiplyNumberX2(@Payload() data: { num: number }) {
+  async mmultiplyNumberX2(@Payload() data: number) {
     this.logger.log(
       'the mmultiplyNumberX2 method worked, data received:',
       data,
@@ -18,7 +18,7 @@ export class AppController {
   }
 
   @MessagePattern('hi')
-  async sayHello(@Payload() data: { name: string }) {
+  async sayHello(@Payload() data: string) {
     this.logger.log('the sayHello method worked, data received:', data);
     return await this.appService.sayHallo(data);
   }
