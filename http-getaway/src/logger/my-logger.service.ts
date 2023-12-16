@@ -10,7 +10,7 @@ export class MyLoggerService implements LoggerService {
   regexp: RegExp;
   context: string;
 
-  constructor(context: string, logPath: string = 'logs' ) {
+  constructor(context: string, logPath: string = 'logs') {
     fs.mkdir(logPath, { recursive: true }, (err) => {
       if (err) throw err;
     });
@@ -80,7 +80,3 @@ export class MyLoggerService implements LoggerService {
     this.write('warn', msg);
   }
 }
-
-
-
-
