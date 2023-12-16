@@ -11,7 +11,7 @@ import { MyLoggerService } from './logger/my-logger.service';
 
 @Controller('api')
 export class AppController {
-  private logger = new MyLoggerService('logs', 'AppController');
+  private logger = new MyLoggerService('AppController');
   constructor(@Inject('MATH_SERVICE') private client: ClientProxy) {}
 
   @Post('/call')
