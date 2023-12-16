@@ -32,7 +32,7 @@ export class AppController {
         return this.client.send<DataDTO>(cmd, record);
       } else if (cmd === 'x2') {
         const record = new RmqRecordBuilder(data.num).build();
-        return this.client.send(cmd, record);
+        return this.client.send<DataDTO>(cmd, record);
       } else {
         throw Error(
           `incorrect command, it must be "hi" or "x2" current cmd:${cmd}`,
